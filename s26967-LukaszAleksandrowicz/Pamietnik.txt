@@ -1,0 +1,4 @@
+2023-03-04
+Moj kochany pamietniczku na dzisiejszych zajeciach nauczylem/lam sie:
+Instalacji debiana na maszynie wirtualnej a dokladniej na Virtualbox odsyłam do mojego w moeje ocenie kompletnego opisu!!
+Zajecia ciekawe bardzo wiele informacji nagranie z wykładu oglądałem 2 razy.Wiec zajecia na + bardziej boje sie następnych bo wiem ze czeka mnie pisanie skryptów ;(.
