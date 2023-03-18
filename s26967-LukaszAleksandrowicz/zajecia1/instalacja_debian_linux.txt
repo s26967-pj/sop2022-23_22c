@@ -1,5 +1,5 @@
 1.	Pobranie obrazu i początkowe ustawienia
-Zaczynamy od pobrania obrazu systemu ISO ze strony debiana następnie pobieramy Virtualboxa rozpoczynamy instalacje wirtualki i lecimy z tematem na górnym pasku visrtualboxa mamy niebieska opcje nowa klikamy i tworzymy nowa maszynę virtualna ale najpierw możemy zmienić w ustawieniach (tam tez można doinstalować rozszerzenia), domyślny folder maszyny następnie wracamy do instalacji
+Zaczynamy od pobrania obrazu systemu ISO ze strony debiana następnie pobieramy Virtualboxa rozpoczynamy instalacje wirtualki i lecimy z tematem na górnym pasku visrtualboxa mamy niebieska opcje nowa klikamy i tworzymy nowa maszynę virtualna ale najpierw możemy zmienić w ustawieniach (tam tez można doinstalować rozszerzenia),wybieramy domyślny folder maszyny następnie wracamy do instalacji
 2.Ustawienia Na virtualbox początek instalacji
 
 Pojawia się okienko, gdzie podajemy nazwę, folder maszyny, typ maszyny my wybieramy linux a następnie wersje debiana 64 bitowa idziemy dalej.
@@ -7,8 +7,11 @@ Następnie przechodzimy do parametrów i wybieramy ile ramu nadamy maszynie po k
 
 Mamy 3 typy dysku twardego 1 to wirtualboxa jest natywne ma dodatkowe wsparcie najmniej się psuje bo to Virtualbox.
 
-Z drugiego można korzystać z niego jak normalnego dysku i jak doinstalujemy Hyper-V to z kompa robimy serwer do zarzadzania podłączam dysk do systemu i tez ten format jest używany w Azure z dysku vhd da się uruchomić kompa.
+Z drugiego można korzystać z niego jak normalnego dysku i jak doinstalujemy Hyper-V to z kompa robimy serwer do zarzadzania podłączam dysk do systemu i tez ten format 
+jest używany w Azure z dysku vhd da się uruchomić kompa.
+
 Trzeci vmdk dla rozwiązań projektowanych przez vm-wear oni to domyśle wykorzystują.
+
 Dynamicznie wybierany czy stały rozmiar jak stały jeden plik zalokowany i tyle ten dysk się nie rozszerza i jak jest stały rozmiar głowica dysku nie musi skakać zostaje w jednym pliku i stały plik zostaje automatycznie zrobiony i wypełniony zerami dynamicznie jest ciekawy bo przydzielamy 1t plik ma 2 mega ale może urosnąć do jednego tera najlepiej jak chcemy robić testy bo on urośnie a potem+ można się go pozbyć ale wymaga stałej alokacji miejsca a to zajmuje czas za każdym razem kiedy się rozszerza system musi znaleźć na naszym dysku miejsce a to zajmuje czas.
 
 Potem wybieramy pamięć mało ze 1gb Następnie mamy w ustawieniach schowek pomiędzy maszynami i możliwość przeciągnięcia i upuszczenia w ustawieniach system wybieramy wielkość ramu mamy do wyboru jeszcze procesor możemy tam sobie ustawić na 2 procesory i akceleracja do gierek jest dobrze włączyć akceleracje 
