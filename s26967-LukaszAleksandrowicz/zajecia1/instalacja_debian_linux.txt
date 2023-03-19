@@ -1,11 +1,15 @@
-1.	Pobranie obrazu i początkowe ustawienia
+1.Pobranie obrazu i początkowe ustawienia
+
 1.A) Zaczynamy od pobrania obrazu systemu ISO ze strony debiana, następnie pobieramy Virtualboxa rozpoczynamy instalacje wirtualki i lecimy z tematem. 
+
 1.B) Na górnym pasku visrtualboxa mamy niebieska opcje "nowa" klikamy i tworzymy nową maszynę virtualna ,ale najpierw możemy zmienić w ustawieniach 
 (tam tez można doinstalować rozszerzenia),wybieramy domyślny folder maszyny następnie wracamy do instalacji.
 
 2.Ustawienia Na virtualbox początek instalacji
+
 2.A) Pojawia się okienko, gdzie podajemy nazwę, folder maszyny, typ maszyny my wybieramy linux a następnie wersje debiana 64 bitowa idziemy dalej.
 Następnie przechodzimy do parametrów i wybieramy ile ramu nadamy maszynie, po krótkim research najlepiej nadać około 1gb ramu będzie optymalnie najlepiej na sam proces instalacji dać więcej zasobów
+
 2.B) Po instalacji możemy to zmniejszyć i ważne jest aby ustawiać wielokrotności liczby 2. Oraz najlepiej użyć 10 gb pamięci jeśli oczywiście będzie to ze środowiskiem graficznym .
 
 2.C) Mamy 3 typy dysku twardego:
