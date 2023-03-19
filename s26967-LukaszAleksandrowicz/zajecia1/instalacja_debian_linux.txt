@@ -49,20 +49,73 @@ Następnie mamy do wyboru konfiguracje sieci i tu albo mamy wybór enterem albo 
 Następnie nazwa domeny jest do wyboru możemy nic nie wybierać.
 Następnie podajemy hasło roota, potwierdzamy hasło i wybieramy nowego użytkownika podajemy user login i hasło.
 
-???Pytanie czy możemy nie tworzyć usera- Nie jest zalecane instalowanie systemu Debian bez utworzenia użytkownika. Podczas instalacji systemu, musisz utworzyć co najmniej jednego użytkownika, który będzie miał uprawnienia administratora (root) oraz dostęp do systemu.
+???Pytanie czy możemy nie tworzyć usera? 
+Nie jest zalecane instalowanie systemu Debian bez utworzenia użytkownika. Podczas instalacji systemu, musisz utworzyć co najmniej jednego użytkownika, który będzie miał uprawnienia administratora (root) oraz dostęp do systemu.
 
 
 3.	Przechodzimy „prawdziwej Instalacji”
-Guided- instalator przygotuje mapowanie dysku wybieramy dysk i mamy zaproponowane robienie partycji dla poszczególnych opcji korzystamy jak szybko chcemy zainstalować wszystko na jednej partycji i dalej albo swój dysk na oddzielnie partycji albo ja mamy reinstalke instalujemy sam system a partycja z katalogami zostaje
 
-Druga opcja Guidet- pozwala użyć wielu różnych dysków w wielu rozmiarach aby zrobić wile rożnych dysków logicznych i będzie jeden na wielu dyskach ssd hdd itd np. podlałam usb i atak rozciągam ten dysk podczas działania systemu operacyjnego dynamiczne rozszerzanie pod spodem to samo I manual mamy wybieramy configure iscsi (i nie chodzi o słownik indyjski) podłączanie dysków poprzez siec nas udostępnia nam usadzenie blokowe gdzie mamy dostęp z innej maszyny na YouTube dużo poradników.
+3.A) Guided- instalator przygotuje mapowanie dysku wybieramy dysk, mamy zaproponowane robienie partycji dla poszczególnych opcji .
+Korzystamy jak szybko chcemy zainstalować wszystko na jednej partycji i dalej albo swój dysk na oddzielnie partycji albo mamy reinstalke instalujemy sam system a partycja z katalogami zostaje.
 
-Wybieramy nasz dysk wirtualny i są 2 typy partycjonowania GPT- kiedy maszyna ma włączone efi oraz MDR-kiedy jest wyłączone klikamy na wole miejsce i tworzymy nowa tablice partycji wybieramy begining można zrobić tylko 4 partycje podstawowe na dysku i jest koniec i jako 4 można zrobić rozszerzona na której są partycje logiczne najczęściej się tak robi partycja podstawowa służy do odpalenia kompa odejmujemy ram razy 1,5 i dopiero wtedy możemy zrobić nasza partycje bo trzeba zostawić miejsce na partycje wymiany.
+3.B) Druga opcja Guidet- pozwala użyć wielu różnych dysków w wielu rozmiarach aby zrobić sporo rożnych dysków logicznych, będzie jeden na wielu dyskach ssd hdd itd np. podałem usb i tak rozciągam ten dysk podczas działania systemu operacyjnego. Dynamiczne rozszerzanie pod spodem to samo I manual mamy wybieramy configure iscsi (i nie chodzi o słownik indyjski). 
+Podłączanie dysków poprzez siec nas udostępnia nam usadzenie blokowe gdzie mamy dostęp z innej maszyny, (na YouTube dużo poradników).
 
-Win złe wyświetla jednostki w podziale dziesiętnym natomiast ilość w systemie si i podajemy w gib i musimy odjąć 1,5gb które będzie jako partycja wymiany nadajemy nazwę i mamy dużo systemów plików do wyboru wszystkie Ext które mamy to podstawowe systemy na linux btrfs czyli lepszy fs tez można z tego korzystać system z jurnalingiem dzięki temu nie będziemy tracić plików XFS najczęściej występuje na red hat-ach potem mamy fat 16 oraz 32 chodzi o długość tablicy danych w systemch fat one były w systemach dosowych swap araea- robienie partycji na swapa reserved BIOS boot area - jeśli mamy włączone efi to partycje tez trzeba robić następnie mamy phisical volume- gdzie mamy RAID które jest potrzebne kiedy mamy wiele dysków można połączyć w jeden co jest bezpieczne ostatnia opcja żeby nie używać partycji następnie wybieramy format partycji systemu pliku wybieramy Ext4 potem miejsce gdzie to zamontować opcje montowania domyślne ,label jest potem mamy reserved blocks ponieważ czasami jest potrzeba zarezerwowania przestrzeni dyskowej, Typical usage tu chodzi jak przydzielić inody jak mamy duży dysk i wiele małych plików to może być problem bo nie będzie inodow  deskryptory pliku gdzie wybieramy gdzie zapisać wybieramy standard
-Następnie mamy bootbale flag gdzie bios wyszukuje partycje i uruchamia system z której mamy ustawiona a tylko jedna z 4 może mieć mamy tam tez miejsce aby usunąć partycje ale my zapisujemy robimy kolejna partycje z pozostałego miejsca i ustawiamy swap area który nie może mieć flagi bootujacej to nie ma sensu ale jest opcja żeby to zmienić przechodzimy dalej i tu tez możemy włączyć RAID ,LVM  można skonfigurować enkrypcje przechodzimy dalej teraz mamy instalacje następnie występuje tasksel tu wybieramy co  ma się domyślnie zainstalować oprócz naszego sytemu dodatkowo ssh i jakie inne ciekawostki mamy Desktop environment gdzie mamy (tu mały opis z różnych źródeł ) GNOME - to jedno z najbardziej popularnych i powszechnie używanych środowisk graficznych. Charakteryzuje się intuicyjnym interfejsem użytkownika, dużą ilością funkcjonalności i konfigurowalnością. KDE Plasma - to kolejne popularne środowisko graficzne, które wyróżnia się podobnie jak GNOME, dużą ilością funkcjonalności i konfigurowalnością. Interfejs użytkownika jest bardziej tradycyjny i może przypominać użytkownikom Windowsa.Xfce - to środowisko graficzne o mniejszych wymaganiach sprzętowych, a więc idealne dla starszych komputerów. Interfejs użytkownika jest prosty i intuicyjny, a DE cechuje się dużą stabilnością i szybkością. LXDE - to jeszcze lżejsze środowisko graficzne, które również charakteryzuje się wysoką wydajnością. Interfejs użytkownika jest minimalistyczny, ale intuicyjny. Cinnamon - to stosunkowo nowe środowisko graficzne, oparte na bibliotece GTK. Interfejs użytkownika jest podobny do GNOME, ale DE oferuje dodatkowe funkcjonalności i możliwości konfiguracji.
-Podczas instalacji Debiana, użytkownik może wybrać jedno z tych środowisk graficznych lub też zainstalować jedynie podstawowy system bez jakiegokolwiek DE i dopiero później doinstalować wybrane środowisko graficzne z poziomu konsoli. Następnie do wyboru mamy web serwer potem print serwer, DNs serwer file serwer który nie jest kompatybilny z udostępnianiem plików w Windows do tego jest samba która używa smb, następnie mail serwer potem mamy laptop która oznacza -(Opcja "laptop" w instalatorze systemu Debian odnosi się do specjalnej konfiguracji systemu, która może być szczególnie korzystna dla użytkowników laptopów i innych urządzeń mobilnych. Wybierając tę opcję, instalator systemu Debian skonfiguruje system pod kątem urządzeń mobilnych, takich jak laptop, w sposób, który zapewni optymalną wydajność i oszczędność energii. Zwykle oznacza to m.in. dostosowanie ustawień zarządzania energią, takich jak tryb uśpienia czy automatyczne wygaszanie ekranu, do specyfiki pracy na laptopie, aby wydłużyć czas działania na baterii. Oprócz tego, instalator systemu Debian może także automatycznie wykrywać i instalować odpowiednie sterowniki dla urządzeń mobilnych, co może być szczególnie pomocne w przypadku niektórych laptopów, które wymagają specjalnych sterowników, aby działać poprawnie.)Następnie mamy Opcje "Standard system utilities" w instalatorze systemu Debian zawiera zestaw podstawowych narzędzi systemowych, które są niezbędne do poprawnego działania systemu. Zwykle wchodzi w skład tych narzędzi: Konsola tekstowa - terminal, który umożliwia użytkownikowi wykonywanie poleceń z poziomu konsoli, bez interfejsu graficznego. Menadżer pakietów - narzędzie umożliwiające zarządzanie pakietami, czyli programami, bibliotekami i innymi plikami, które są potrzebne do działania systemu lub aplikacji. Narzędzia sieciowe - programy umożliwiające konfigurację i zarządzanie siecią, takie jak np. interfejs sieciowy, przeglądarka sieciowa czy klient FTP. Narzędzia dyskowe - programy służące do zarządzania dyskiem twardym, takie jak np. GParted (do zarządzania partycjami), smartmontools (do diagnozowania stanu dysku), czy programy do klonowania dysku. Edytory tekstowe - narzędzia do edycji plików tekstowych, takie jak nano, vim czy emacs. Narzędzia systemowe - programy służące do zarządzania systemem, takie jak np.   (do harmonogramowania zadań), logrotate (do rotacji logów systemowych) czy sysstat (do zbierania statystyk systemowych).Oczywiście, lista ta nie jest kompletna i może się różnić w zależności od wersji systemu Debian. 
-Jeśli nie wybierzemy środowiska graficznego będziemy widzieć tylko tekstowo a jak wybierzemy pare środowisk graficznych Bede mogli wybrać podczas logowania które chce wybrać I KONIECZNIE MUSIMY WYŁĄCZYC EFI żeby nie mieć problemów i żeby było łatwiej na dysku będą 4 partycje 1,2,3 i 5 bo 5 jest 1 partycja rozszerzoną Nie skanujemy dodatkowych mediów i wybieramy mirror taski gda.pl bo jest najbliżej na politechnice dzięki czemu szybko się będzie ściągało potem tamy task sel restart pakietów i Zostaje nam tylko restart systemu !!!!
+3.C) Wybieramy nasz dysk wirtualny i są 2 typy partycjonowania:
+GPT- kiedy maszyna ma włączone efi.
+MDR-kiedy jest wyłączone klikamy na wole miejsce i tworzymy nowa tablice partycji wybieramy begining, można zrobić tylko 4 partycje podstawowe na dysku i jest koniec . Jako 4 można zrobić rozszerzona na której są partycje logiczne najczęściej się tak robi.
+Partycja podstawowa służy do odpalenia kompa odejmujemy ram razy 1,5 i dopiero wtedy możemy zrobić nasza partycje bo trzeba zostawić miejsce na partycje wymiany.
+
+3.D) Win złe wyświetla jednostki w podziale dziesiętnym natomiast ilość w systemie si. Podajemy w gib i musimy odjąć 1,5gb które będzie jako partycja wymiany nadajemy nazwę. 
+Mamy dużo systemów plików do wyboru wszystkie Ext, które mamy to podstawowe systemy na linux btrfs czyli lepszy fs tez można z tego korzystać. 
+System z jurnalingiem dzięki temu nie będziemy tracić plików XFS najczęściej występuje na red hat-ach. 
+Potem mamy fat 16 oraz 32 chodzi o długość tablicy danych w systemch fat one były w systemach dosowych swap. 
+Araea- robienie partycji na swapa reserved BIOS boot. 
+Area - jeśli mamy włączone efi to partycje tez trzeba robić. 
+Następnie mamy phisical volume- gdzie mamy RAID które jest potrzebne kiedy mamy wiele dysków można połączyć w jeden co jest bezpieczne ostatnia opcja żeby nie używać partycji.
+
+3.E) Następnie wybieramy format partycji systemu pliku. 
+Wybieramy Ext4 potem miejsce gdzie to zamontować opcje montowania domyślne ,label jest potem mamy reserved blocks ponieważ czasami jest potrzeba zarezerwowania przestrzeni dyskowej.
+
+3.F) Typical usage tu chodzi jak przydzielić inody jak mamy duży dysk i wiele małych plików to może być problem bo nie będzie inodow  deskryptory pliku gdzie wybieramy gdzie zapisać wybieramy standard.
+
+3.G) Następnie mamy bootbale flag gdzie bios wyszukuje partycje i uruchamia system z której mamy ustawiona a tylko jedna z 4 może mieć mamy tam tez miejsce aby usunąć partycje, ale my zapisujemy.
+Robimy kolejna partycje z pozostałego miejsca i ustawiamy swap area który nie może mieć flagi bootujacej to nie ma sensu, ale jest opcja żeby to zmienić przechodzimy dalej i tu tez możemy włączyć RAID ,LVM.  
+
+3.H) Można skonfigurować enkrypcje, przechodzimy dalej teraz mamy instalacje. 
+Występuje tasksel tu wybieramy co  ma się domyślnie zainstalować oprócz naszego sytemu dodatkowo ssh i jakie inne ciekawostki.
+Desktop environment gdzie mamy (tu mały opis z różnych źródeł ): 
+GNOME - to jedno z najbardziej popularnych i powszechnie używanych środowisk graficznych. Charakteryzuje się intuicyjnym interfejsem użytkownika, dużą ilością funkcjonalności i konfigurowalnością. 
+KDE Plasma - to kolejne popularne środowisko graficzne, które wyróżnia się podobnie jak GNOME, dużą ilością funkcjonalności i konfigurowalnością. Interfejs użytkownika jest bardziej tradycyjny i może przypominać użytkownikom Windowsa.
+Xfce - to środowisko graficzne o mniejszych wymaganiach sprzętowych, a więc idealne dla starszych komputerów. Interfejs użytkownika jest prosty i intuicyjny, a DE cechuje się dużą stabilnością i szybkością. 
+LXDE - to jeszcze lżejsze środowisko graficzne, które również charakteryzuje się wysoką wydajnością. Interfejs użytkownika jest minimalistyczny, ale intuicyjny. Cinnamon - to stosunkowo nowe środowisko graficzne, oparte na bibliotece GTK.
+Interfejs użytkownika jest podobny do GNOME, ale DE oferuje dodatkowe funkcjonalności i możliwości konfiguracji.
+Podczas instalacji Debiana, użytkownik może wybrać jedno z tych środowisk graficznych lub też zainstalować jedynie podstawowy system bez jakiegokolwiek DE. Dopiero później doinstalować wybrane środowisko graficzne z poziomu konsoli. 
+
+3.I) Następnie do wyboru mamy web serwer potem print serwer, DNs serwer file serwer który nie jest kompatybilny z udostępnianiem plików w Windows do tego jest samba która używa smb,następnie mail server 
+
+3.J) Potem mamy laptop która oznacza -(Opcja "laptop" w instalatorze systemu Debian odnosi się do specjalnej konfiguracji systemu, która może być szczególnie korzystna dla użytkowników laptopów i innych urządzeń mobilnych). 
+Wybierając tę opcję, instalator systemu Debian skonfiguruje system pod kątem urządzeń mobilnych, takich jak laptop, w sposób, który zapewni optymalną wydajność i oszczędność energii. 
+Zwykle oznacza to m.in. dostosowanie ustawień zarządzania energią, takich jak tryb uśpienia czy automatyczne wygaszanie ekranu, do specyfiki pracy na laptopie, aby wydłużyć czas działania na baterii. 
+Oprócz tego, instalator systemu Debian może także automatycznie wykrywać i instalować odpowiednie sterowniki dla urządzeń mobilnych, co może być szczególnie pomocne w przypadku niektórych laptopów, które wymagają specjalnych sterowników, aby działać poprawnie.
+
+3.K) Następnie mamy opcje "Standard system utilities":
+instalatorze systemu Debian zawiera zestaw podstawowych narzędzi systemowych, które są niezbędne do poprawnego działania systemu. 
+Zwykle wchodzi w skład tych narzędzi:
+Konsola tekstowa - terminal, który umożliwia użytkownikowi wykonywanie poleceń z poziomu konsoli, bez interfejsu graficznego. 
+Menadżer pakietów - narzędzie umożliwiające zarządzanie pakietami, czyli programami, bibliotekami i innymi plikami, które są potrzebne do działania systemu lub aplikacji. 
+Narzędzia sieciowe - programy umożliwiające konfigurację i zarządzanie siecią, takie jak np. interfejs sieciowy, przeglądarka sieciowa czy klient FTP.
+Narzędzia dyskowe - programy służące do zarządzania dyskiem twardym, takie jak np. GParted (do zarządzania partycjami), smartmontools (do diagnozowania stanu dysku), czy programy do klonowania dysku. 
+Edytory tekstowe - narzędzia do edycji plików tekstowych, takie jak nano, vim czy emacs. 
+Narzędzia systemowe - programy służące do zarządzania systemem, takie jak np.   (do harmonogramowania zadań), logrotate (do rotacji logów systemowych) czy sysstat (do zbierania statystyk systemowych).
+Oczywiście, lista ta nie jest kompletna i może się różnić w zależności od wersji systemu Debian.
+
+3.L) Jeśli nie wybierzemy środowiska graficznego będziemy widzieć tylko tekstowo a jak wybierzemy pare środowisk graficznych.
+Bedą mogli wybrać podczas logowania które chce wybrać.
+I KONIECZNIE MUSIMY WYŁĄCZYC EFI żeby nie mieć problemów i żeby było łatwiej na dysku będą 4 partycje 1,2,3 i 5 bo 5 jest 1 partycja rozszerzoną.
+3.M) Nie skanujemy dodatkowych mediów i wybieramy mirror taski gda.pl bo jest najbliżej na politechnice dzięki czemu szybko się będzie ściągało potem tamy task sel restart pakietów .
+
+4 Zostaje nam tylko restart systemu !!!!
 
 
 
