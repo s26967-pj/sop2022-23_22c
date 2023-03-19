@@ -1,38 +1,55 @@
 1.	Pobranie obrazu i początkowe ustawienia
-Zaczynamy od pobrania obrazu systemu ISO ze strony debiana następnie pobieramy Virtualboxa rozpoczynamy instalacje wirtualki i lecimy z tematem na górnym pasku visrtualboxa mamy niebieska opcje nowa klikamy i tworzymy nowa maszynę virtualna ale najpierw możemy zmienić w ustawieniach (tam tez można doinstalować rozszerzenia),wybieramy domyślny folder maszyny następnie wracamy do instalacji
+1.A) Zaczynamy od pobrania obrazu systemu ISO ze strony debiana, następnie pobieramy Virtualboxa rozpoczynamy instalacje wirtualki i lecimy z tematem. 
+1.B) Na górnym pasku visrtualboxa mamy niebieska opcje "nowa" klikamy i tworzymy nową maszynę virtualna ,ale najpierw możemy zmienić w ustawieniach 
+(tam tez można doinstalować rozszerzenia),wybieramy domyślny folder maszyny następnie wracamy do instalacji.
+
 2.Ustawienia Na virtualbox początek instalacji
+2.A) Pojawia się okienko, gdzie podajemy nazwę, folder maszyny, typ maszyny my wybieramy linux a następnie wersje debiana 64 bitowa idziemy dalej.
+Następnie przechodzimy do parametrów i wybieramy ile ramu nadamy maszynie, po krótkim research najlepiej nadać około 1gb ramu będzie optymalnie najlepiej na sam proces instalacji dać więcej zasobów
+2.B) Po instalacji możemy to zmniejszyć i ważne jest aby ustawiać wielokrotności liczby 2. Oraz najlepiej użyć 10 gb pamięci jeśli oczywiście będzie to ze środowiskiem graficznym .
 
-Pojawia się okienko, gdzie podajemy nazwę, folder maszyny, typ maszyny my wybieramy linux a następnie wersje debiana 64 bitowa idziemy dalej.
-Następnie przechodzimy do parametrów i wybieramy ile ramu nadamy maszynie po krótkim research najlepiej nadać około 1gb ramu będzie optymalnie najlepiej na sam proces instalacji dać więcej zasobów po instalacji możemy to zmniejszyć i ważne jest aby ustawiać wielokrotności liczby 2.Oraz najlepiej użyć 10 gb pamięci jeśli oczywiście będzie to ze środowiskiem graficznym później .
-
-Mamy 3 typy dysku twardego 1 to wirtualboxa jest natywne ma dodatkowe wsparcie najmniej się psuje bo to Virtualbox.
-
-Z drugiego można korzystać z niego jak normalnego dysku i jak doinstalujemy Hyper-V to z kompa robimy serwer do zarzadzania podłączam dysk do systemu i tez ten format 
+2.C) Mamy 3 typy dysku twardego:
+Pierwszy to wirtualboxa jest natywne ma dodatkowe wsparcie najmniej się psuje bo to Virtualbox.
+Z drugiego można korzystać z jak normalnego dysku i jak doinstalujemy Hyper-V to z kompa robimy serwer do zarzadzania podłączam dysk do systemu. Tez ten format 
 jest używany w Azure z dysku vhd da się uruchomić kompa.
+Trzeci vmdk dla rozwiązań projektowanych przez VMware oni to domyśle wykorzystują.
 
-Trzeci vmdk dla rozwiązań projektowanych przez vm-wear oni to domyśle wykorzystują.
+2.D) Dynamicznie wybierany czy stały rozmiar jak stały jeden plik zalokowany i tyle ten dysk się nie rozszerza i jak jest stały rozmiar głowica dysku nie musi skakać zostaje w jednym pliku.
+Stały plik zostaje automatycznie zrobiony i wypełniony zerami dynamicznie jest ciekawy bo przydzielamy 1t plik ma 2 mega ale może urosnąć do jednego tera. 
+Najlepiej jak chcemy robić testy bo on urośnie a potem, można się go pozbyć ale wymaga stałej alokacji miejsca a to zajmuje czas za każdym razem kiedy się rozszerza system musi znaleźć na naszym dysku miejsce.
 
-Dynamicznie wybierany czy stały rozmiar jak stały jeden plik zalokowany i tyle ten dysk się nie rozszerza i jak jest stały rozmiar głowica dysku nie musi skakać zostaje w jednym pliku i stały plik zostaje automatycznie zrobiony i wypełniony zerami dynamicznie jest ciekawy bo przydzielamy 1t plik ma 2 mega ale może urosnąć do jednego tera najlepiej jak chcemy robić testy bo on urośnie a potem+ można się go pozbyć ale wymaga stałej alokacji miejsca a to zajmuje czas za każdym razem kiedy się rozszerza system musi znaleźć na naszym dysku miejsce a to zajmuje czas.
-
-Potem wybieramy pamięć mało ze 1gb Następnie mamy w ustawieniach schowek pomiędzy maszynami i możliwość przeciągnięcia i upuszczenia w ustawieniach system wybieramy wielkość ramu mamy do wyboru jeszcze procesor możemy tam sobie ustawić na 2 procesory i akceleracja do gierek jest dobrze włączyć akceleracje 
+2.E) Potem wybieramy pamięć, mało około 1gb. Następnie mamy w ustawieniach schowek pomiędzy maszynami i możliwość przeciągnięcia i upuszczenia w ustawieniach. 
+System wybieramy wielkość ramu, mamy do wyboru jeszcze procesor możemy tam sobie ustawić na 2 procesory i akceleracja do gierek jest dobrze ją włączyć.
 
 !!!Wybieramy ekran i można ustawić jakieś pierdoły dla karty graficznej i jednak tu włączamy akceleracje dla grafy 3d i tu zmieniamy liczbę monitorów ważne !!!
 
-Następnie mamy pamięć i kontrolery IDE dyski do wyboru płyty itd. następnie dźwięk można wyłączyć nie potrzebne Potem karty sieciowe można wybrać parę oraz mamy parę typów karty my wybieramy Nat działa to tak ze nasz komputer jest routerem i wszystko przechodzi przez kompa.
+2.F) Następnie mamy pamięć i kontrolery IDE dyski do wyboru płyty itd. Następnie dźwięk można wyłączyć (nie potrzebny).
+Potem karty sieciowe można wybrać parę oraz mamy parę typów karty my wybieramy Nat działa to tak ze nasz komputer jest routerem i wszystko przechodzi przez kompa.
+Każda karta musi mieć unikatowy adres mac i nie zmieniamy go potem bo beda kłopoty z komunikacja sieciowa. 
 
-Każda karta musi mieć unikatowy adres mac i nie zmieniamy go potem bo beda kłopoty z komunikacja sieciowa pod spodem mamy przekierowanie portów jak byśmy chcieli postawić serwer SSH Porty szeregowe my nie będziemy używać ale czasami jest potrzebne chodź jest to przestarzale kontrolery usb możemy dodać żeby np. było cos domyślnie podłączony i nie wyłączamy usb udostępnione foldery służą do zapisywania plików na hoście bądź przesyłaniu plików pomiędzy maszyna a kompem Interface użytkownika kwestia własna żeby umieści. 
+2.G) Pod spodem mamy przekierowanie portów jak byśmy chcieli postawić serwer SSH. Porty szeregowe my nie będziemy używać ale czasami są potrzebne, chodź jest to przestarzale. Kontrolery usb możemy dodać żeby np. było cos domyślnie podłączone i nie wyłączamy usb udostępnione foldery służą do zapisywania plików na hoście bądź przesyłaniu plików pomiędzy maszyna a kompem. Interface użytkownika kwestia własna żeby umieści. 
 
-Następnie startujemy maszynę mamy 3 opcje zwykły start normalne uruchomienie (w widoku możemy zmieniać opcje wyświetlania) Start bezgłowy mamy dodatkowa opcje aby odłączyć interface graficzny dzięki temu możemy zrobić "ubogi" serwer możemy mieć ileś maszyn włączonych i nie zagracają nam ekranu Oddzieleniu start robi to samo co wyżej tylko pokazuje od razu interface graficzny  .
+2.H) Następnie startujemy maszynę mamy 3 opcje zwykły start normalne uruchomienie (w widoku możemy zmieniać opcje wyświetlania).
+Start bezgłowy mamy dodatkowa opcje aby odłączyć interface graficzny dzięki temu możemy zrobić "ubogi" serwer możemy mieć ileś maszyn włączonych i nie zagracają nam ekranu. Oddzieleniu start robi to samo co wyżej tylko pokazuje od razu interface graficzny  .
 
-Najlepiej używać oddzielnego startu Pojawia się okienko w wyborem instalacji Graficzna instalacja jak chcemy używać myszy i klikać (wolniejsze)i wymaga więcej zasobów 
+2.I) Najlepiej używać oddzielnego startu. Pojawia się okienko w wyborem instalacji Graficzna instalacja jak chcemy używać myszy i klikać (wolniejsze)i wymaga więcej zasobów.
+Instalacja terminalem używamy samego terminala i tylko klawiatury (szybciej).
+Inne opcje instalacja ekspertcka dla ekspertow dodatkowe opcje. 
+Sesuce instalacja w razie jak cos się zepsuje. 
+Na samym dole speech dla niewidomych esc.
 
-Instalacja terminalem używamy samego terminala i tylko klawiatury (szybciej)inne opcje instalacja eksperca dla eksperow dodatkowe opcje sesuce instalacja w razie jak cos się zepsuje i na samym dole speech dla niewidomych esc przechodzimy do poprzedniego kroku dużo jest tych opcji ojoj
+2.J) Przechodzimy do poprzedniego kroku dużo jest tych opcji ojoj
+My wybieramy oczywiście instalacji tekstowej.
+Jeden wybór języka i z racji ze jesteśmy w Polsce wybieramy język angielski bo i tak logi i funkcje są w języku angielskim. 
+Potem do wyboru lokalizacja ale my wybieramy other i wybieramy Europę tam mamy Polskę która wybieramy po to żeby mieć polskie znaki diakrytyczne i nazwy plików nie w języku polskim w razie czego łatwiej odzyskać i zmniejszamy liczbę potencjalnych błędów. 
+Mapowanie klawiszy język angielski.  
 
-My wybieramy oczywiście instalacji tekstowej 1 wybór języka i z racji ze jesteśmy w Polsce wybieramy język angielski bo i tak logi i funkcje są w języku angielskim potem do wyboru lokalizacja ale my wybieramy other i wybieramy Europę tam mamy Polskę która wybieramy po to żeby mieć polskie znaki diakrytyczne i nazwy plików nie w języku polskim w razie czego łatwiej odzyskać i zmniejszamy liczbę potencjalnych błędów mapowanie klawiszy język angielski i teraz idzie instalacja z płytki.
+2.K) Teraz idzie instalacja z płytki.
+Następnie mamy do wyboru konfiguracje sieci i tu albo mamy wybór enterem albo tabulatorem żeby się poruszac. 
+Następnie nazwa domeny jest do wyboru możemy nic nie wybierać.
+Następnie podajemy hasło roota, potwierdzamy hasło i wybieramy nowego użytkownika podajemy user login i hasło.
 
-Następnie mamy do wyboru Konfiguracje sieci i tu albo mamy wybór enterem albo tabulatorem żeby się prezesować następnie nazwa domeny jest do wyboru możemy nic nie wybierać Następnie podajemy hasło roota Następnie potwierdzamy hasło i wybieramy nowego użytkownika podajemy user login i hasło.
-
-Pytanie czy możemy nie tworzyć usera- Nie jest zalecane instalowanie systemu Debian bez utworzenia użytkownika. Podczas instalacji systemu, musisz utworzyć co najmniej jednego użytkownika, który będzie miał uprawnienia administratora (root) oraz dostęp do systemu.
+???Pytanie czy możemy nie tworzyć usera- Nie jest zalecane instalowanie systemu Debian bez utworzenia użytkownika. Podczas instalacji systemu, musisz utworzyć co najmniej jednego użytkownika, który będzie miał uprawnienia administratora (root) oraz dostęp do systemu.
 
 
 3.	Przechodzimy „prawdziwej Instalacji”
