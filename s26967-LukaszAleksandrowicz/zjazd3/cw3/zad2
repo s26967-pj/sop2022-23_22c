@@ -16,7 +16,4 @@ function fibonacci {
   return $((c+d))
 }
 
-# przykładowe użycie funkcji fibonacci
-fibonacci 7
-wynik=$?
-printf "7-ty element ciągu Fibonacciego to: %d\n" $wynik
+
