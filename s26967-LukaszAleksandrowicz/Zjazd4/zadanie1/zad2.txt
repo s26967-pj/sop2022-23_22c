@@ -13,3 +13,5 @@ int main() {
     std::cout << "Suma liczb wynosi: " << sum << std::endl;
     return sum;
 }
+
+
