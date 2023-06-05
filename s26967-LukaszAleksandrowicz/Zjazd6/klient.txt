@@ -1,0 +1,102 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cstring>
+#include <arpa/inet.h>
+#include <sys/socket.h>
+#include <sys/types.h>
+#include <netinet/in.h>
+#include <unistd.h>
+
+const int BUFFER_SIZE = 1024;
+
+int main() {
+    // Utworzenie gniazda
+    int clientSocket = socket(AF_INET, SOCK_STREAM, 0);
+    if (clientSocket == -1) {
+        std::cerr << "Błąd podczas tworzenia gniazda." << std::endl;
+        return 1;
+    }
+
+    // Połączenie z serwerem
+    sockaddr_in serverAddress{};
+    serverAddress.sin_family = AF_INET;
+    serverAddress.sin_port = htons(12345);  // Wybrany port
+    if (inet_pton(AF_INET, "127.0.0.1", &(serverAddress.sin_addr)) <= 0) {
+        std::cerr << "Błąd podczas konwertowania adresu IP." << std::endl;
+        close(clientSocket);
+        return 1;
+    }
+
+    if (connect(clientSocket, (struct sockaddr*)&serverAddress, sizeof(serverAddress)) == -1) {
+        std::cerr << "Błąd podczas łączenia z serwerem." << std::endl;
+        close(clientSocket);
+        return 1;
+    }
+
+    // Wczytanie nazwy pliku od klienta
+    std::string filename;
+    std::cout << "Podaj nazwę pliku do pobrania: ";
+    std::cin >> filename;
+
+    // Wysłanie nazwy pliku do serwera
+    uint32_t filenameLength = filename.length();
+    filenameLength = htonl(filenameLength);
+
+    if (write(clientSocket, &filenameLength, sizeof(filenameLength)) != sizeof(filenameLength)) {
+        std::cerr << "Błąd podczas wysyłania długości nazwy pliku do serwera." << std::endl;
+        close(clientSocket);
+        return 1;
+    }
+
+    if (write(clientSocket, filename.c_str(), filename.length()) != static_cast<int>(filename.length())) {
+        std::cerr << "Błąd podczas wysyłania nazwy pliku do serwera." << std::endl;
+        close(clientSocket);
+        return 1;
+    }
+
+    // Odbieranie rozmiaru pliku od serwera
+    int32_t fileSize;
+    if (read(clientSocket, &fileSize, sizeof(fileSize)) != sizeof(fileSize)) {
+        std::cerr << "Błąd podczas odbierania rozmiaru pliku od serwera." << std::endl;
+        close(clientSocket);
+        return 1;
+    }
+
+    fileSize = ntohl(fileSize);
+
+    if (fileSize == -1) {
+        std::cout << "Plik \"" << filename << "\" nie istnieje na serwerze." << std::endl;
+        close(clientSocket);
+        return 0;
+    }
+
+    // Odbieranie pliku od serwera
+    std::ofstream file(filename, std::ios::binary);
+    if (!file) {
+        std::cerr << "Błąd podczas otwierania pliku do zapisu." << std::endl;
+        close(clientSocket);
+        return 1;
+    }
+
+    char buffer[BUFFER_SIZE];
+    int bytesReceived = 0;
+
+    while (bytesReceived < fileSize) {
+        int bytesRead = read(clientSocket, buffer, BUFFER_SIZE);
+        if (bytesRead <= 0) {
+            std::cerr << "Błąd podczas odbierania pliku od serwera." << std::endl;
+            break;
+        }
+
+        file.write(buffer, bytesRead);
+        bytesReceived += bytesRead;
+    }
+
+    file.close();
+    close(clientSocket);
+
+    std::cout << "Plik \"" << filename << "\" został pobrany." << std::endl;
+
+    return 0;
+}

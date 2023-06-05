@@ -1,0 +1,124 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cstring>
+#include <arpa/inet.h>
+#include <sys/socket.h>
+#include <sys/types.h>
+#include <netinet/in.h>
+#include <unistd.h>
+#include <signal.h>
+
+const int BUFFER_SIZE = 1024;
+
+void handleCtrlC(int signal) {
+    std::cout << "Serwer zostaje zatrzymany." << std::endl;
+    exit(0);
+}
+
+int main() {
+    signal(SIGINT, handleCtrlC);
+
+    // Utworzenie gniazda
+    int serverSocket = socket(AF_INET, SOCK_STREAM, 0);
+    if (serverSocket == -1) {
+        std::cerr << "Błąd podczas tworzenia gniazda." << std::endl;
+        return 1;
+    }
+
+    // Powiązanie gniazda z adresem IP i portem
+    sockaddr_in serverAddress{};
+    serverAddress.sin_family = AF_INET;
+    serverAddress.sin_port = htons(12345);  // Wybrany port
+    serverAddress.sin_addr.s_addr = INADDR_ANY;
+
+    if (bind(serverSocket, (struct sockaddr*)&serverAddress, sizeof(serverAddress)) == -1) {
+        std::cerr << "Błąd podczas powiązywania gniazda z adresem IP i portem." << std::endl;
+        close(serverSocket);
+        return 1;
+    }
+
+    // Nasłuchiwanie na połączenia
+    if (listen(serverSocket, 5) == -1) {
+        std::cerr << "Błąd podczas nasłuchiwania na połączenia." << std::endl;
+        close(serverSocket);
+        return 1;
+    }
+
+    std::cout << "Serwer nasłuchuje na porcie 12345." << std::endl;
+
+    while (true) {
+        // Akceptowanie połączenia
+        sockaddr_in clientAddress{};
+        socklen_t clientAddressLength = sizeof(clientAddress);
+        int clientSocket = accept(serverSocket, (struct sockaddr*)&clientAddress, &clientAddressLength);
+        if (clientSocket == -1) {
+            std::cerr << "Błąd podczas akceptowania połączenia." << std::endl;
+            close(serverSocket);
+            return 1;
+        }
+
+        // Odczytanie nazwy pliku od klienta
+        uint32_t filenameLength;
+        if (read(clientSocket, &filenameLength, sizeof(filenameLength)) != sizeof(filenameLength)) {
+            std::cerr << "Błąd podczas odczytywania długości nazwy pliku od klienta." << std::endl;
+            close(clientSocket);
+            continue;
+        }
+
+        filenameLength = ntohl(filenameLength);
+        char* filename = new char[filenameLength + 1];
+        memset(filename, 0, filenameLength + 1);
+
+        if (read(clientSocket, filename, filenameLength) != filenameLength) {
+            std::cerr << "Błąd podczas odczytywania nazwy pliku od klienta." << std::endl;
+            delete[] filename;
+            close(clientSocket);
+            continue;
+        }
+
+        // Otwarcie pliku do odczytu
+        std::ifstream file(filename, std::ios::binary);
+        delete[] filename;
+
+        if (!file) {
+            std::cout << "Plik \"" << filename << "\" nie istnieje." << std::endl;
+            int32_t fileSize = -1;  // Wysyłamy rozmiar pliku -1 jako sygnalizację błędu
+            fileSize = htonl(fileSize);
+            write(clientSocket, &fileSize, sizeof(fileSize));
+            close(clientSocket);
+            continue;
+        }
+
+        // Pobranie rozmiaru pliku
+        file.seekg(0, std::ios::end);
+        int32_t fileSize = file.tellg();
+        file.seekg(0, std::ios::beg);
+        fileSize = htonl(fileSize);
+
+        // Wysłanie rozmiaru pliku do klienta
+        if (write(clientSocket, &fileSize, sizeof(fileSize)) != sizeof(fileSize)) {
+            std::cerr << "Błąd podczas wysyłania rozmiaru pliku do klienta." << std::endl;
+            close(clientSocket);
+            continue;
+        }
+
+        // Wysyłanie pliku do klienta paczkami
+        char buffer[BUFFER_SIZE];
+        while (!file.eof()) {
+            file.read(buffer, BUFFER_SIZE);
+            int bytesRead = file.gcount();
+
+            if (write(clientSocket, buffer, bytesRead) != bytesRead) {
+                std::cerr << "Błąd podczas wysyłania pliku do klienta." << std::endl;
+                break;
+            }
+        }
+
+        file.close();
+        close(clientSocket);
+    }
+
+    close(serverSocket);
+    return 0;
+}

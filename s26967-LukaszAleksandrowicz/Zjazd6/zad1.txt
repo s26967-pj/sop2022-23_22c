@@ -1,0 +1,22 @@
+#include <iostream>
+#include <csignal>
+#include <unistd.h>
+
+void signalHandler(int signal) {
+    if (signal == SIGUSR1) {
+        std::cout << "Otrzymano sygnał SIGUSR1. Program kończy działanie." << std::endl;
+        _exit(0); // Zmiana exit(0) na _exit(0)
+    }
+}
+
+int main() {
+    std::cout << "PID procesu: " << getpid() << std::endl;
+
+    signal(SIGUSR1, signalHandler);
+
+    while (true) {
+        pause();
+    }
+
+    return 0;
+}

@@ -1,0 +1,42 @@
+#include <iostream>
+#include <fstream>
+#include <csignal>
+#include <unistd.h>
+#include <cstdlib>
+
+const std::string lockFilePath = "/tmp/lock";
+
+void handleUSR1(int signal) {
+    if (signal == SIGUSR1) {
+        std::cout << "Wykryto próbę uruchomienia drugiej instancji programu." << std::endl;
+    }
+}
+
+int main() {
+    std::ifstream lockFile(lockFilePath.c_str());
+    if (lockFile.is_open()) {
+        int existingPID;
+        lockFile >> existingPID;
+        lockFile.close();
+
+        kill(existingPID, SIGUSR1);
+        return 0;
+    }
+
+    std::ofstream newLockFile(lockFilePath.c_str());
+    if (!newLockFile.is_open()) {
+        std::cout << "Błąd tworzenia pliku blokady." << std::endl;
+        return 1;
+    }
+
+    newLockFile << getpid();
+    newLockFile.close();
+
+    signal(SIGUSR1, handleUSR1);
+
+    while (true) {
+        sleep(1);
+    }
+
+    return 0;
+}
